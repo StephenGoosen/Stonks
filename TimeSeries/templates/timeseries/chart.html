@@ -1,0 +1,41 @@
+<!-- timeseries/templates/timeseries/chart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Series Chart</title>
+    <!-- Include necessary libraries for charts, e.g., Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Time Series Chart</h1>
+    <canvas id="myChart" width="800" height="400"></canvas>
+
+    <!-- Use a script block to pass data from Django to JavaScript -->
+    <script>
+        // Use JavaScript to fetch data and create a chart
+        // You can use libraries like Chart.js for this purpose
+        // Example: https://www.chartjs.org/docs/latest/samples/line/basic.html
+        // Fetch data from Django view and format it as needed
+        const data = JSON.parse('{{ data_json|escapejs }}');
+
+        const timestamps = data.map(entry => entry.timestamp);
+        const values = data.map(entry => entry.value);
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'Time Series Data',
+                    data: values,
+                    borderColor: 'blue',
+                    borderWidth: 1,
+                    fill: false,
+                }]
+            },
+        });
+    </script>
+</body>
+</html>
