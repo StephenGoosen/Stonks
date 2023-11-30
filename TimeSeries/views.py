@@ -2,9 +2,56 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+import pandas as pd
+import os
 
+from django.db import connection
 from django.shortcuts import render
 from .forms import StockSelectionForm
+from Stonks.settings import BASE_DIR
+
+def stocks_page(request):
+    if request.method == 'POST':
+        # Get selected stock and number of years from the form
+        stock_symbol = request.POST.get('stock_symbol')
+        num_years = int(request.POST.get('num_years'))
+
+        # Retrieve stock data using yfinance
+        stock_data = yf.download(stock_symbol, period=f'{num_years}y')
+
+        # Call plot1 function to generate the plot and get the image file name
+        image_path = plot1(request, stock_data['Close'], stock_symbol, num_years)
+
+        return render(request, 'stocks_page.html', {'image_path': image_path, 'stock_symbols': get_stock_symbols()})
+
+    return render(request, 'stocks_page.html', {'image_path': None, 'stock_symbols': get_stock_symbols()})
+
+
+def get_stock_symbols():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT DISTINCT symbol FROM TimeSeries_stock")
+        stock_symbols = [row[0] for row in cursor.fetchall()]
+
+    return stock_symbols
+
+
+def plot1(request, data, name, time):
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(10, 6))
+    plt.plot(data)
+    plt.title(f'{name} Closing Prices Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Closing Price')
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Save the plot image to a file
+    image_filename = f'{name}_plot.png'
+    image_path = os.path.join(BASE_DIR, 'staticfiles/admin/img', image_filename)
+    plt.savefig(image_path)
+
+    return image_filename
+
 
 def time_series_chart(request):
     data = TimeSeriesData.objects.all()

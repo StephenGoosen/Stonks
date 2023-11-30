@@ -1,3 +1,10 @@
+'''
+The following code locates the symbols in the yfinance database, and
+extracts descriptive information to be stored in the Stock table. The
+symbols used for extraction are taken from the nasdaq screener:
+https://www.nasdaq.com/market-activity/stocks/screener. 
+'''
+
 import sys
 sys.path.append('/home/steph/ts/Stonks')
 
@@ -81,19 +88,21 @@ with sqlite3.connect('db.sqlite3') as conn:
 
                     # Add the result to the dictionary
                     result_dict[attribute] = recent_value
+
                 except IndexError:
-                    # Handle the case where the attribute is not found
+                    # Indicate when attribute is not found and return NA value
                     print(f"Attribute not found for {stockShort}: {attribute}")
-                    result_dict[attribute] = None  # Set the value to None for missing attributes
+                    result_dict[attribute] = None 
 
             return result_dict
+        
         except Exception as e:
             logger.error(f"Error for {stockShort}: {e}")
             return None
     
-    # Modified extractAttributesLoop function
+    # extractAttributesLoop function loops through each symbol
     def extractAttributesLoop(stock_list):
-        # Create the table in the database
+
         create_table()
 
         # List to store data for bulk insertion
@@ -101,6 +110,7 @@ with sqlite3.connect('db.sqlite3') as conn:
 
         # Loop through a list of short name stocks
         for stock_short in stock_list:
+
             # Call the extractAttributes function for each stock
             result_dict = extractAttributes(stock_short)
             data_list.append(result_dict)
