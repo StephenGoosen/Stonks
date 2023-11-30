@@ -1,0 +1,15 @@
+Symbol,Name,Last Sale,Net Change,% Change,Market Cap,Country,IPO Year,Volume,Sector,Industry
+AAPL,Apple Inc. Common Stock,$189.37,-1.03,-0.541%,2945224646240.00,United States,1980,42966531,Technology,Computer Manufacturing
+ACN,Accenture plc Class A Ordinary Shares (Ireland),$333.34,0.78,0.235%,221708455747.00,Ireland,2001,1307287,Technology,EDP Services
+ADBE,Adobe Inc. Common Stock,$617.39,-5.93,-0.951%,281097667000.00,United States,1986,2594677,Technology,Computer Software: Prepackaged Software
+AMD,Advanced Micro Devices Inc. Common Stock,$123.85,1.84,1.508%,200079537650.00,United States,,37839877,Technology,Semiconductors
+ASML,ASML Holding N.V. New York Registry Shares,$687.61,11.62,1.719%,271323624898.00,Netherlands,1995,795173,Technology,Industrial Machinery/Components
+AVGO,Broadcom Inc. Common Stock,$940.83,-5.52,-0.583%,388313944228.00,United States,2009,3483614,Technology,Semiconductors
+CRM,Salesforce Inc. Common Stock,$230.35,5.43,2.414%,224130550000.00,United States,2004,12081694,Technology,Computer Software: Prepackaged Software
+GOOG,Alphabet Inc. Class C Capital Stock,$136.40,-2.22,-1.602%,1707182400000.00,United States,2004,20993683,Technology,Computer Software: Programming Data Processing
+GOOGL,Alphabet Inc. Class A Common Stock,$134.99,-2.21,-1.611%,1689534840000.00,United States,2004,23950356,Technology,Computer Software: Programming Data Processing
+META,Meta Platforms Inc. Class A Common Stock,$332.20,-6.79,-2.003%,853708399570.00,United States,2012,16007730,Technology,Computer Software: Programming Data Processing
+MSFT,Microsoft Corporation Common Stock,$378.85,-3.85,-1.006%,2815712583342.00,United States,1986,28941797,Technology,Computer Software: Prepackaged Software
+NVDA,NVIDIA Corporation Common Stock,$481.40,3.19,0.667%,1189058000000.00,United States,1999,38145045,Technology,Semiconductors
+ORCL,Oracle Corporation Common Stock,$116.21,-0.03,-0.026%,318394598410.00,United States,1986,6127105,Technology,Computer Software: Prepackaged Software
+TSM,Taiwan Semiconductor Manufacturing Company Ltd.,$98.88,0.90,0.919%,512799203977.00,Taiwan,1997,7090024,Technology,Semiconductors

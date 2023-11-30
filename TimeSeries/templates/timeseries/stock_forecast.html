@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'stock_forecast' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+    <!-- forecast_result.html -->
+    <img src="data:image/png;base64,{{ fig_acf }}" alt="ACF Plot">
+    <img src="data:image/png;base64,{{ fig_pacf }}" alt="PACF Plot">
+</form>
