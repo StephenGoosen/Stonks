@@ -1,0 +1,91 @@
+/* styles.css */
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+main.dark-mode {
+    background-color: #121212;
+}
+
+h3 {
+    color: #000000;
+    margin-top: 20px;
+}
+
+h3.dark-mode {
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Add styles for Select2 dropdown */
+.select2-container--default .select2-selection--single {
+    background-color: #ffffff; /* Set the background color for the dropdown */
+    color: #000000; /* Set the text color for the dropdown */
+    border: 1px solid #ccc; /* Set the border color for the dropdown */
+}
+
+.select2-container--default.select2-container--open .select2-selection--single {
+    border: 1px solid #aaa; /* Set the border color for the open dropdown */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+img#logo {
+    max-width: 30%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+} 
+
+p {
+    color: #777;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}

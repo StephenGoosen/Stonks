@@ -36,7 +36,6 @@ def get_stock_symbols():
 
 
 def plot1(request, data, name, time):
-    import matplotlib.pyplot as plt
     plt.figure(figsize=(10, 6))
     plt.plot(data)
     plt.title(f'{name} Closing Prices Over Time')
