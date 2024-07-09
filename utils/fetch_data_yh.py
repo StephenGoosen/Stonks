@@ -16,17 +16,13 @@ def fetch_stock_data(symbol):
     stock_data = yf.download(symbol, start='2020-01-01', end='2023-01-01')
     print(f"Data for {symbol}:\n{stock_data}")
 
-# Example usage
 stock = yf.Ticker('AAPL')
 
-# Get stock information
 stock_info = stock.info
 
-# Print the information
 print(stock_info)
 
 def download_stock_data(symbol, start_date, end_date):
-    # Download historical data from Yahoo Finance
     data = yf.download(symbol, start=start_date, end=end_date)
     return data
 
@@ -53,7 +49,7 @@ def main():
     start_date = '2022-01-01'
     end_date = '2023-01-01'
 
-    stock_symbols = ["AAPL", "GOOGL", "MSFT"]  # Replace with your actual data
+    stock_symbols = ["AAPL", "GOOGL", "MSFT"]
 
     for symbol in stock_symbols:
         stock_info = get_stock_info(symbol)

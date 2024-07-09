@@ -2,8 +2,6 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
-import pandas as pd
-import os
 
 from django.db import connection
 from django.shortcuts import render, HttpResponse
