@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 from django.db import connection
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .forms import StockSelectionForm
 from Stonks.settings import BASE_DIR
 
@@ -19,37 +19,67 @@ def stocks_page(request):
         # Retrieve stock data using yfinance
         stock_data = yf.download(stock_symbol, period=f'{num_years}y')
 
-        # Call plot1 function to generate the plot and get the image file name
-        image_path = plot1(request, stock_data['Close'], stock_symbol, num_years)
+        # Call plot1 function to generate the plot and get the image URL
+        image_url = plot1(stock_data['Close'], stock_symbol, num_years)
 
-        return render(request, 'stocks_page.html', {'image_path': image_path, 'stock_symbols': get_stock_symbols()})
+        return render(request, 'stocks_page.html', {
+            'image_url': image_url, 
+            'name': stock_symbol, 
+            'stock_symbols': get_stock_symbols()
+        })
 
-    return render(request, 'stocks_page.html', {'image_path': None, 'stock_symbols': get_stock_symbols()})
-
+    return render(request, 'stocks_page.html', {
+        'image_url': None, 
+        'stock_symbols': get_stock_symbols()
+    })
 
 def get_stock_symbols():
     with connection.cursor() as cursor:
         cursor.execute("SELECT DISTINCT symbol FROM TimeSeries_stock")
         stock_symbols = [row[0] for row in cursor.fetchall()]
-
     return stock_symbols
 
-
-def plot1(request, data, name, time):
+def plot1(data, name, time):
     plt.figure(figsize=(10, 6))
     plt.plot(data)
-    plt.title(f'{name} Closing Prices Over Time')
+    plt.title(f'{name} Closing Prices Over {time} Years', fontsize=20)
     plt.xlabel('Date')
     plt.ylabel('Closing Price')
     plt.grid(True)
     plt.tight_layout()
 
-    # Save the plot image to a file
-    image_filename = f'{name}_plot.png'
-    image_path = os.path.join(BASE_DIR, 'staticfiles/admin/img', image_filename)
-    plt.savefig(image_path)
+    # Save the plot to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
 
-    return image_filename
+    # Encode the BytesIO object to base64
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    buffer.close()
+
+    # Generate the image URL for the HTML template
+    image_url = f'data:image/png;base64,{image_base64}'
+    return image_url
+
+def test_image(request):
+    # Sample data for testing
+    data = yf.download('A', period=f'3y') 
+    name = "Sample Stock"  
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(data)
+    plt.title(f'{name} Closing Prices Over Time', fontsize=20)
+    plt.xlabel('Date')
+    plt.ylabel('Closing Price')
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Save the plot to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    return HttpResponse(buffer, content_type='image/png')
 
 
 def time_series_chart(request):

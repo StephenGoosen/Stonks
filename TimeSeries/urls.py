@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import time_series_chart, stock_forecast, stocks_page
+from .views import time_series_chart, stock_forecast, stocks_page, test_image
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -8,6 +8,7 @@ urlpatterns = [
     path('chart/', time_series_chart, name='time_series_chart'),
     path('stock-forecast/', stock_forecast, name='stock_forecast'),
     path('stocks/', stocks_page, name='stocks_page'),
+    path('test_image/', test_image, name='test_image'),
 ]
 
 if settings.DEBUG:
